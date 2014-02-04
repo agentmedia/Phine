@@ -2,10 +2,10 @@
 
 namespace Phine\Framework\Localization;
 use Phine\Framework\Localization\Base;
-/**
- * Provides methods to store translations in a derived php class
- */
 
+/**
+ * Provides methods to store translations within php files
+ */
 class PhpTranslator extends Base\FormatTranslator
 {
     /**
@@ -13,11 +13,13 @@ class PhpTranslator extends Base\FormatTranslator
      * @var PhpTranslator
      */
     private static $singleton;
+    
     /**
      * The translations
      * @var array 
      */
     private $translations = array();
+    
     /**
      * The currently used language
      * @var string 
@@ -29,7 +31,10 @@ class PhpTranslator extends Base\FormatTranslator
      * @var string
      */
     private $defaultLanguage;
-    
+     /**
+     * Creates a new instanceof the php translator
+     * @return PhpTranslator
+     */
     private function __construct($defaultLanguage)
     {
         $this->defaultLanguage = $defaultLanguage;
@@ -46,24 +51,6 @@ class PhpTranslator extends Base\FormatTranslator
         return self::$singleton;
     }
     
-    /**
-     * Sets the default language
-     * @param string $language 
-     */
-    public function SetDefaultLanguage($language)
-    {
-        $this->defaultLanguage = $language;
-    }
-    
-    /**
-     * 
-     * Gets the default language
-     * @return string Returns the default language
-     */
-    public function GetDefaultLanguage()
-    {
-        return $this->defaultLanguage;
-    }
     /**
      * Gets the replacement text of the placeholder
      * @param string $placeholder
@@ -89,6 +76,9 @@ class PhpTranslator extends Base\FormatTranslator
         return $this->language;
     }
     
+    /**
+     * Sets the current language
+     */
     public function SetLanguage($language = null)
     {
         if (!$language)
@@ -107,6 +97,4 @@ class PhpTranslator extends Base\FormatTranslator
     {
         $this->translations[$language][$placeholder] = $text;
     }
-    
-    
 }
